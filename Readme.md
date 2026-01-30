@@ -16,6 +16,9 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
 
 ## How to install
 
+> [!Important]
+> Beat the vanilla game before playing the AP
+
 (tutorial totally not copy and pasted from Tunic AP mod and BTD6 Mod helper)
 
 - Make sure to have [.Net6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) installed
@@ -28,7 +31,7 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
     - Copy the `SW_CreeperKing.Werepelago` folder from the release zip into `Mods` under your game's install directory.
 - Launch the game again and you should see the connection input on the top left of the title screen!
 - To uninstall the mod, either remove/delete the `SW_CreeperKing.Werepelago` folder
--
+
 ---
 
 # Tools:
