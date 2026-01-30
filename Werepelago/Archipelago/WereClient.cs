@@ -1,3 +1,4 @@
+using Archipelago.MultiClient.Net;
 using Archipelago.MultiClient.Net.Enums;
 using CreepyUtil.Archipelago;
 using CreepyUtil.Archipelago.ApClient;
@@ -8,12 +9,13 @@ namespace Werepelago.Archipelago;
 
 public static class WereClient
 {
-    public static Dictionary<string, string> FrameIdMap;
-    public static Dictionary<string, string> IdFrameMap;
     public static ApClient Client = new(new TimeSpan(0, 1, 0));
     public static ApData Data = new();
     public static HashSet<string> Items = [];
-    
+    public static Dictionary<string, string> DayIdToDay;
+    public static Dictionary<string, string> ItemIdToItem;
+    public static HashSet<string> CompletedLevels;
+
     public static void Init()
     {
         if (File.Exists("ApConnection.json"))
@@ -32,11 +34,12 @@ public static class WereClient
             try
             {
                 Items.Clear();
+                SendLocation("Starting Check (Washer)");
+                SendLocation("Starting Check (Unlock Monday Night)");
+                Client.Say("hello");
+                CompletedLevels = Client.GetFromStorage<string[]>("levels_completed", def: []).ToHashSet();
             }
-            catch (Exception e)
-            {
-                Core.Log.Error(e);
-            }
+            catch (Exception e) { Core.Log.Error(e); }
         };
 
         Client.OnConnectionErrorReceived += (e, s) => { Core.Log.Error(e); };
@@ -52,11 +55,11 @@ public static class WereClient
 
         var login = new LoginInfo(port, slotName, addressSplit[0], password);
 
-        return Client.TryConnect(login, "Widget Inc", ItemsHandlingFlags.AllItems);
+        return Client.TryConnect(login, "The WereCleaner", ItemsHandlingFlags.AllItems);
     }
-    
+
     public static void SaveFile() => File.WriteAllText("ApConnection.json", JsonConvert.SerializeObject(Data));
-    
+
     public static void Update()
     {
         try
@@ -65,15 +68,16 @@ public static class WereClient
             Client.UpdateConnection();
 
             if (!Client.IsConnected) return;
-            
-            foreach (var item in Client.GetOutstandingItems()!)
-            {
-                Items.Add(item.ItemName);
-            }
+
+            foreach (var item in Client.GetOutstandingItems()!) { Items.Add(item.ItemName); }
         }
-        catch (Exception e)
-        {
-            Core.Log.Error(e);
-        }
+        catch (Exception e) { Core.Log.Error(e); }
+    }
+
+    public static void SendLocation(string loc) //idk why but i can't use my lib for this
+    {
+        Core.Log.Msg($"Try Send: [{loc}]");
+        Client.GetPrivateField<ArchipelagoSession>("Session").Locations
+              .CompleteLocationChecks(Client.Locations[loc]);
     }
 }

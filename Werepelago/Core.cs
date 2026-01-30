@@ -22,6 +22,8 @@ public class Core : MelonMod
 
         Log.Msg("Running ApShenanigans");
 
+        ApShenanigans.RunShenanigans();
+
         Log.Msg("Ran ApShenanigans");
 
         var classesToPatch = MelonAssembly.Assembly.GetTypes()
@@ -37,6 +39,16 @@ public class Core : MelonMod
             Log.Msg($"Loaded: [{patch.Name}]");
         }
 
+        Log.Msg("Loading Data");
+
+        WereClient.DayIdToDay = File.ReadAllLines($"{ApShenanigans.DataFolder}/levelIds.txt")
+                                    .Select(s => s.Split(':'))
+                                    .ToDictionary(arr => arr[1], arr => arr[0]);
+        
+        WereClient.ItemIdToItem = File.ReadAllLines($"{ApShenanigans.DataFolder}/itemIds.txt")
+                                      .Select(s => s.Split(':'))
+                                      .ToDictionary(arr => arr[1], arr => arr[0]);
+
         LoggerInstance.Msg("Setting up Client");
 
         WereClient.Init();
@@ -45,8 +57,6 @@ public class Core : MelonMod
 
         ToolManager.SetVacuumUnlock(true);
         ToolManager.SetKnapperUnlock(true);
-
-        // CollectibleItemButton
     }
 
     public override void OnSceneWasLoaded(int buildIndex, string sceneName)
@@ -62,11 +72,8 @@ public class Core : MelonMod
                 obj.AddComponent<APGui>();
                 break;
             default:
-                if (sceneName.StartsWith("Level_") && sceneName.EndsWith("_V2"))
-                {
-                    return;
-                }
-                
+                if (sceneName.StartsWith("Level_") && sceneName.EndsWith("_V2")) { return; }
+
                 Log.Msg($"Scene loaded: [{sceneName}]");
                 break;
         }

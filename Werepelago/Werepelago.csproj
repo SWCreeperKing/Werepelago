@@ -343,6 +343,8 @@
 		<Compile Include="Core.cs" />
 		<Compile Include="Helper.cs" />
 		<Compile Include="Patches\CollectiblePatch.cs" />
+		<Compile Include="Patches\LevelSelectPatch.cs" />
+		<Compile Include="Patches\LevelWinPatch.cs" />
 		<Compile Include="Patches\NpcPatch.cs" />
 		<Compile Include="Patches\TimerPatch.cs" />
 		<Compile Include="Patches\ToolPatch.cs" />
