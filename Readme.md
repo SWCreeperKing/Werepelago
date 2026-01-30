@@ -1,6 +1,7 @@
 Help support me, this and future projects on [Patreon](https://www.patreon.com/c/SW_CreeperKing)
 
 ---
+
 ## Randomizer Info BEFORE INSTALLING
 
 ## Features/Information
@@ -11,6 +12,9 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
     - Colletibles
     - Unique Kills
     - Beating a level
+- Items:
+    - Level Unlocks
+    - Abilities (Washer, Vacuum, Knapper)
 
 ---
 
@@ -23,7 +27,8 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
 
 - Make sure to have [.Net6.0](https://dotnet.microsoft.com/en-us/download/dotnet/6.0) installed
 - Download and Install [Melon Loader](https://melonwiki.xyz/#/?id=automated-installation).
-    - The default The WereCleaner install directory (for steam): C:\Program Files (x86)\Steam\steamapps\common\The WereCleaner
+    - The default The WereCleaner install directory (for steam): C:\Program Files (x86)\Steam\steamapps\common\The
+      WereCleaner
     - Recommended melon version: 7.1
 - Launch the game and close it. This will finalize the Melon installation.
 - Download and extract the `SW_CreeperKing.Werepelago.zip` from
