@@ -19,7 +19,6 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
     - Abilities (Washer, Vacuum, Knapper)
 
 ---
-
 ## How to install
 
 > [!Important]
