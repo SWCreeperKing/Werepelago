@@ -12,6 +12,8 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
     - Colletibles
     - Unique Kills
     - Beating a level
+    - Markers for checks (collectables/kills) as a purple !
+    - Indicator for when you survived a night (if the stars and no kills badge doesn't show)
 - Items:
     - Level Unlocks
     - Abilities (Washer, Vacuum, Knapper)

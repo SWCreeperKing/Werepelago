@@ -11,7 +11,7 @@ public static class LevelWinPatch
     public static void LevelWon(bool success)
     {
         if (!success) return;
-        WereClient.SendLocation($"Survive {WereClient.DayIdToDay[SceneManager.GetActiveScene().name]} Night");
+        WereClient.Client.SendLocation($"Survive {WereClient.DayIdToDay[SceneManager.GetActiveScene().name]} Night");
         WereClient.CompletedLevels.Add(SceneManager.GetActiveScene().name);
         WereClient.Client.SendToStorage("levels_completed", WereClient.CompletedLevels.ToArray());
         

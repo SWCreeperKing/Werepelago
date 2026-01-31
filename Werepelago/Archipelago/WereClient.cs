@@ -34,15 +34,15 @@ public static class WereClient
             try
             {
                 Items.Clear();
-                SendLocation("Starting Check (Washer)");
-                SendLocation("Starting Check (Unlock Monday Night)");
-                Client.Say("hello");
+                Client.SendLocation("Starting Check (Washer)");
+                Client.SendLocation("Starting Check (Unlock Monday Night)");
                 CompletedLevels = Client.GetFromStorage<string[]>("levels_completed", def: []).ToHashSet();
             }
             catch (Exception e) { Core.Log.Error(e); }
         };
 
-        Client.OnConnectionErrorReceived += (e, s) => { Core.Log.Error(e); };
+        Client.OnConnectionErrorReceived += (e, _) => Core.Log.Error(e);
+        Client.OnErrorReceived += e => Core.Log.Error(e);
     }
 
     [CanBeNull]
@@ -72,12 +72,5 @@ public static class WereClient
             foreach (var item in Client.GetOutstandingItems()!) { Items.Add(item.ItemName); }
         }
         catch (Exception e) { Core.Log.Error(e); }
-    }
-
-    public static void SendLocation(string loc) //idk why but i can't use my lib for this
-    {
-        Core.Log.Msg($"Try Send: [{loc}]");
-        Client.GetPrivateField<ArchipelagoSession>("Session").Locations
-              .CompleteLocationChecks(Client.Locations[loc]);
     }
 }

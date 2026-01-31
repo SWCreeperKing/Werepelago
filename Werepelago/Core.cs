@@ -11,7 +11,7 @@ namespace Werepelago;
 
 public class Core : MelonMod
 {
-    public const string VersionNumber = "0.1.0";
+    public const string VersionNumber = "0.1.1";
     public static MelonLogger.Instance Log;
 
     public static GameObject PlayButton;

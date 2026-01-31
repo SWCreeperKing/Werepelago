@@ -12,5 +12,13 @@ public static class LevelSelectPatch
         __instance.gameObject.SetActive(
             WereClient.Items.Contains($"Unlock {WereClient.DayIdToDay[__instance.sceneName]} Night")
         );
+        if (!WereClient.Client.MissingLocations.Contains(
+                $"Survive {WereClient.DayIdToDay[__instance.sceneName]} Night"
+            )) return;
+        var child = __instance.GetChild(0);
+        child.GetChild(5).SetActive(false);
+        child.GetChild(6).SetActive(false);
+        child.GetChild(7).SetActive(false);
+        child.GetChild(8).SetActive(false);
     }
 }
