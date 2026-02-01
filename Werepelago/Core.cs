@@ -11,7 +11,7 @@ namespace Werepelago;
 
 public class Core : MelonMod
 {
-    public const string VersionNumber = "0.1.1";
+    public const string VersionNumber = "0.1.2";
     public static MelonLogger.Instance Log;
 
     public static GameObject PlayButton;
@@ -70,6 +70,9 @@ public class Core : MelonMod
                 PlayButton = GameObject.Find("Canvas/MainMenu/Buttons/WithTutorials/Play Button");
                 var obj = new GameObject("AP Menu");
                 obj.AddComponent<APGui>();
+                break;
+            case "ScoreCard":
+                GameObject.Find("Canvas/ScoringPanel/Base/Content/ProgressContent/DefaultButtons/Next/Button").SetActive(false);
                 break;
             default:
                 if (sceneName.StartsWith("Level_") && sceneName.EndsWith("_V2")) { return; }

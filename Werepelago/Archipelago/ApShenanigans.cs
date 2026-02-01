@@ -55,12 +55,14 @@ public static class ApShenanigans
                     .AddItems(ItemFactory.ItemClassification.Progression, items: abilities)
                     .AddItems(ItemFactory.ItemClassification.Progression, items: dayUnlocks)
                     .AddItem("Floor Penny", ItemFactory.ItemClassification.Filler)
-                    .AddCreateItems(method => method.AddCode("""
-                                                             for item, classification in item_table.items():
-                                                                 world.location_count -= 1
-                                                                 if item != "Unlock Monday Night":
-                                                                     pool.append(world.create_item(item))
-                                                             """)
+                    .AddCreateItems(method => method
+                                             .AddCode(CreateItemsFromClassificationList())
+                                             // .AddCode("""
+                                             //                 for item, classification in item_table.items():
+                                             //                     world.location_count -= 1
+                                             //                     if item != "Unlock Monday Night":
+                                             //                         pool.append(world.create_item(item))
+                                             //                 """)
                                                     .AddCode(CreateItemsFillRemainingWithItem("Floor Penny"))
                      )
                     .GenerateItemsFile();
@@ -73,14 +75,14 @@ public static class ApShenanigans
                     .AddLogicRules(
                          collectibles.ToDictionary(
                              s => s, s => string.Join(
-                                 " and ", levelData.Where(data => data.Collectibles.Contains(s))
+                                 " or ", levelData.Where(data => data.Collectibles.Contains(s))
                                                    .Select(s => $"level[\"{s.LevelName}\"]")
                              )
                          )
                      ).AddLogicRules(
                          rawNpcs.ToDictionary(
                              s => $"Kill {s}", s => string.Join(
-                                 " and ", npcData.Where(data => data.Npcs.Contains(s))
+                                 " or ", npcData.Where(data => data.Npcs.Contains(s))
                                                  .Select(s => $"level[\"{s.LevelName}\"]")
                              )
                          )
@@ -109,8 +111,8 @@ public static class ApShenanigans
 
         worldFactory.GetInitFactory(FileLink)
                     .UseInitFunction(method => method.AddCode(new Variable("self.starting_stage", "\"\"")))
-                    .AddUseUniversalTrackerPassthrough()
-                    .UseGenerateEarly(method => method.AddCode(CreatePushPrecollected("Unlock Monday Night")))
+                    .AddUseUniversalTrackerPassthrough(yamlNeeded: false)
+                    // .UseGenerateEarly(method => method.AddCode(CreatePushPrecollected("Unlock Monday Night")))
                     .UseCreateRegions()
                     .AddCreateItems()
                     .UseSetRules(method => method.AddCode(
