@@ -33,7 +33,7 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
     - Recommended melon version: 7.1
 - Launch the game and close it. This will finalize the Melon installation.
 - Download and extract the `SW_CreeperKing.Werepelago.zip` from
-  the [latest release page](https://github.com/SWCreeperKing/Widgitpelago/releases/latest).
+  the [latest release page](https://github.com/SWCreeperKing/Werepelago/releases/latest).
     - Copy the `SW_CreeperKing.Werepelago` folder from the release zip into `Mods` under your game's install directory.
 - Launch the game again and you should see the connection input on the top left of the title screen!
 - To uninstall the mod, either remove/delete the `SW_CreeperKing.Werepelago` folder
