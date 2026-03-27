@@ -15,7 +15,7 @@ public static class ApShenanigans
     public const string FileLink
         = "https://github.com/SWCreeperKing/Werepelago/blob/master/Werepelago/Archipelago/ApShenanigans.cs";
 
-    public const string ApWorldOutput = "E:/coding projects/python/Deathipelago/worlds/the_werecleaner";
+    public const string ApWorldOutput = "E:/coding projects/python/Deathipelago" + "/worlds/the_werecleaner";
 
     public static void RunShenanigans()
     {
@@ -43,35 +43,35 @@ public static class ApShenanigans
                     // .AddOption("Kill Sanity", "Killing each unique npc sends a check", new Toggle())
                     .AddCheckOptions()
                     .GenerateOptionFile();
-
+        string[] Locations; //ignored atm
         worldFactory.GetLocationFactory(FileLink)
                     .AddLocations("starting_checks", [["Starting Check (Washer)", "Menu"], ["Starting Check (Unlock Monday Night)", "Menu"]])
                     .AddLocations("collectibles", collectibles.Select(s => (string[])[s, "Collectibles"]))
                     .AddLocations("npcs", allNpcs.Select(s => (string[])[s, "Killsanity"]))
                     .AddLocations("levels", days.Select(s => (string[])[s, "Levels"]))
-                    .GenerateLocationFile();
-
+                    .GenerateLocationFile(out Locations);
+        string[] Items; //ignored atm
         worldFactory.GetItemFactory(FileLink)
                     .AddItems(ItemFactory.ItemClassification.Progression, items: abilities)
                     .AddItems(ItemFactory.ItemClassification.Progression, items: dayUnlocks)
                     .AddItem("Floor Penny", ItemFactory.ItemClassification.Filler)
                     .AddCreateItems(method => method
-                                             .AddCode(CreateItemsFromClassificationList())
+                                             .AddCode(CreateItemsFromClassificationList(collection:"item_table.items()"))
                                              // .AddCode("""
                                              //                 for item, classification in item_table.items():
                                              //                     world.location_count -= 1
                                              //                     if item != "Unlock Monday Night":
                                              //                         pool.append(world.create_item(item))
                                              //                 """)
-                                                    .AddCode(CreateItemsFillRemainingWithItem("Floor Penny"))
+                                             .AddCode(CreateItemsFillRemainingWithItem("Floor Penny"))
                      )
-                    .GenerateItemsFile();
+                    .GenerateItemsFile(out Items);
 
         worldFactory.GetRuleFactory(FileLink)
-                    .AddLogicFunction("level", "has_level", StateHasR("f\"Unlock {level} Night\""), "level")
-                    .AddLogicFunction("Washer", "has_washer", StateHasSR("Washer"))
-                    .AddLogicFunction("Vacuum", "has_vacuum", StateHasSR("Vacuum"))
-                    .AddLogicFunction("Knapper", "has_knapper", StateHasSR("Knapper"))
+                    .AddLogicFunction("level", "has_level", StateHas("f\"Unlock {level} Night\"", stringify:false), "level")
+                    .AddLogicFunction("Washer", "has_washer", StateHas("Washer"))
+                    .AddLogicFunction("Vacuum", "has_vacuum", StateHas("Vacuum"))
+                    .AddLogicFunction("Knapper", "has_knapper", StateHas("Knapper"))
                     .AddLogicRules(
                          collectibles.ToDictionary(
                              s => s, s => string.Join(
@@ -108,6 +108,9 @@ public static class ApShenanigans
                          "levels", "f\"Beat: {location[0]}\"", "\"Nights Survived\""
                      )
                     .GenerateRegionFile();
+                    //Make Empty Settings.py Files to Conform with Automated Imports in __init__py
+        worldFactory.GetHostSettingsFactory(FileLink)
+                    .GenerateHostSettingsFile();
 
         worldFactory.GetInitFactory(FileLink)
                     .UseInitFunction(method => method.AddCode(new Variable("self.starting_stage", "\"\"")))
@@ -123,7 +126,7 @@ public static class ApShenanigans
                     .InjectCodeIntoWorld(world => world.AddVariable(new Variable("gen_puml", "False")))
                     .UseGenerateOutput(method => method.AddCode(PumlGenCode()))
                     .GenerateInitFile();
-
+        
         worldFactory.GenerateArchipelagoJson("0.6.5", Core.VersionNumber, "SW_CreeperKing");
 
         File.WriteAllLines($"{DataFolder}/levelIds.txt", npcData.Select(data => $"{data.LevelName}:{data.LevelId}"));
