@@ -15,7 +15,7 @@ public static class LevelWinPatch
         WereClient.CompletedLevels.Add(SceneManager.GetActiveScene().name);
         WereClient.Client.SendToStorage("levels_completed", WereClient.CompletedLevels.ToArray());
         
-        if (WereClient.Client.HasGoaled || WereClient.CompletedLevels.Count < 7) return;
-        WereClient.Client.Goal();
+        if (WereClient.CompletedLevels.Count < 7) return;
+        WereClient.Client.TryGoal();
     }
 }

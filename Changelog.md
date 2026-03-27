@@ -1,8 +1,8 @@
 v0.1.2
 - Fixed some logic errors
-- Fixed UT requiring yaml when it really doesn't
-- Removed 'Next' button from the Score Card
-- You no longer start with money unlocked
+- Fixed UT requiring YAML when it really doesn't
+- Removed 'Next' button from the Scorecard
+- You no longer start with Monday unlocked
 
 ---
 v0.1.1

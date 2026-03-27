@@ -15,16 +15,13 @@ public class Core : MelonMod
     public static MelonLogger.Instance Log;
 
     public static GameObject PlayButton;
+    public const string DataFolder = "Mods/SW_CreeperKing.Werepelago/Data";
 
     public override void OnInitializeMelon()
     {
         Log = LoggerInstance;
 
-        Log.Msg("Running ApShenanigans");
-
-        ApShenanigans.RunShenanigans();
-
-        Log.Msg("Ran ApShenanigans");
+        Log.Msg("Running Shenanigans");
 
         var classesToPatch = MelonAssembly.Assembly.GetTypes()
                                           .Where(t => t.GetCustomAttributes(typeof(PatchAllAttribute), false).Any())
@@ -41,11 +38,11 @@ public class Core : MelonMod
 
         Log.Msg("Loading Data");
 
-        WereClient.DayIdToDay = File.ReadAllLines($"{ApShenanigans.DataFolder}/levelIds.txt")
+        WereClient.DayIdToDay = File.ReadAllLines($"{DataFolder}/levelIds.txt")
                                     .Select(s => s.Split(':'))
                                     .ToDictionary(arr => arr[1], arr => arr[0]);
         
-        WereClient.ItemIdToItem = File.ReadAllLines($"{ApShenanigans.DataFolder}/itemIds.txt")
+        WereClient.ItemIdToItem = File.ReadAllLines($"{DataFolder}/itemIds.txt")
                                       .Select(s => s.Split(':'))
                                       .ToDictionary(arr => arr[1], arr => arr[0]);
 

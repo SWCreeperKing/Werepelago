@@ -338,7 +338,6 @@
 	<ItemGroup>
 		<Compile Include="Archipelago\ApData.cs" />
 		<Compile Include="Archipelago\APGui.cs" />
-		<Compile Include="Archipelago\ApShenanigans.cs" />
 		<Compile Include="Archipelago\WereClient.cs" />
 		<Compile Include="Core.cs" />
 		<Compile Include="Helper.cs" />

@@ -9,7 +9,7 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
 - Goal:
     - Complete all 7 levels
 - Checks:
-    - Colletibles
+    - Collectibles
     - Unique Kills
     - Beating a level
     - Markers for checks (collectables/kills) as a purple ?
@@ -35,7 +35,7 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
 - Download and extract the `SW_CreeperKing.Werepelago.zip` from
   the [latest release page](https://github.com/SWCreeperKing/Widgitpelago/releases/latest).
     - Copy the `SW_CreeperKing.Werepelago` folder from the release zip into `Mods` under your game's install directory.
-- Launch the game again and you should see the connection input on the top left of the title screen!
+- Launch the game again, and you should see the connection input on the top left of the title screen!
 - To uninstall the mod, either remove/delete the `SW_CreeperKing.Werepelago` folder
 
 ---
