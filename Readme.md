@@ -35,6 +35,7 @@ Help support me, this and future projects on [Patreon](https://www.patreon.com/c
 - Download and extract the `SW_CreeperKing.Werepelago.zip` from
   the [latest release page](https://github.com/SWCreeperKing/Werepelago/releases/latest).
     - Copy the `SW_CreeperKing.Werepelago` folder from the release zip into `Mods` under your game's install directory.
+    - Make sure that the folder directory is not `Mods/SW_CreeperKing.Werepelago/SW_CreeperKing.Werepelago`, if it is, take the inner folder and put it in the Mods folder
 - Launch the game again, and you should see the connection input on the top left of the title screen!
 - To uninstall the mod, either remove/delete the `SW_CreeperKing.Werepelago` folder
 
